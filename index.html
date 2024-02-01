@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미래엔 폰트 테스트</title>
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <style>
+    html,body{min-height:100%;}
+    *{margin:0;padding:0;}
+    .control{
+      position:fixed;left:0;top:0;
+      z-index:9999;
+    }
+    .toggle, .next{
+      font-size:16px;
+    }
+    .viewport{
+      position:absolute;
+      left:50%;
+      top:0%;
+      transform: translate(-50%, 0);
+      width:1280px;
+      height:720px;
+      border:3px dashed red;
+      overflow:hidden;
+    }
+    .f16{
+      display:none;
+    }
+    .viewport ul li{
+      display:none;
+    }
+    .viewport ul li.active{
+      display:block;
+    }
+  </style>
+</head>
+<body>
+  <div class="control">
+    <select class="toggle">
+      <option value="14">폰트14</option>
+      <option value="16">폰트16</option>
+    </select><br />
+    <button class="next">다음장</button>
+    <div class="info"></div>
+  </div>
+  <div class="viewport">
+    <ul>
+      <li class="active"><img src="./aseets/Type_14_홈_1280_720_01.png" class="f14" /><img src="./aseets/Type_16_홈_1280_720_01.png" class="f16" /></li>
+      <li><img src="./aseets/Type_14_수업화면_1280_720_01.png" class="f14" /><img src="./aseets/Type_16_수업화면_1280_720_01.png" class="f16" /></li>
+      <li><img src="./aseets/Type_14_대시보드_1280_720_01.png" class="f14" /><img src="./aseets/Type_16_대시보드_1280_720_01.png" class="f16" /></li>
+      <li><img src="./aseets/Type_14_대시보드_1280_720_02.png" class="f14" /><img src="./aseets/Type_16_대시보드_1280_720_02.png" class="f16" /></li>
+    </ul>
+  </div>
+  <script>
+    let size = 14;
+    $('.toggle').change(() => {
+      size = $('.toggle option:selected').val();
+      if(size == 14){
+        $('.f14').show();
+        $('.f16').hide()
+      }else{
+        $('.f14').hide();
+        $('.f16').show()
+      }
+    })
+    let now = 0;
+    const max = 3;
+    $('.next').click(() =>{
+      $('.viewport ul li').eq(now).removeClass('active');
+      if (now == max){
+        now = 0
+      }else {
+        ++now;
+      }
+      $('.viewport ul li').eq(now).addClass('active');
+    })
+  </script>
+</body>
+</html>
